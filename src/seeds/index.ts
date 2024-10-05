@@ -1,3 +1,8 @@
-// import db from '../config/connections.js';
-// I will need to import the models here for users and thoughts and reactions
-// import cleanDB from './cleanDB.js';
+import db from '../config/connections.js';
+import cleanDB from './cleanDB.js';
+import { User, Thought } from '../models/index.js';
+
+try {
+    await db();
+    await cleanDB();
+}
