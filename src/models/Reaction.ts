@@ -28,3 +28,5 @@ const reactionsSchema = new Schema(
         id: false
     }
 );
+
+export default reactionsSchema;
