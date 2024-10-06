@@ -1,4 +1,4 @@
-import { User, Thought } from "../models";
+import { User, Thought } from '../models/index.js';
 
 const cleanDB = async () => {
   try {

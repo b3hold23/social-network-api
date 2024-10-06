@@ -1,6 +1,9 @@
 import db from '../config/connections.js';
+import Thought from '../models/Thought.js';
+import User from '../models/User.js';
 import cleanDB from './cleanDB.js';
-import { User, Thought } from '../models/index.js';
+export { default as User } from '../models/User.js';
+export { default as Thought } from '../models/Thought.js';
 const seed = async () => {
     try {
         await db();
