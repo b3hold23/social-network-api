@@ -6,7 +6,7 @@ export { default as User } from '../models/User.js';
 export { default as Thought } from '../models/Thought.js';
 
 
-const seed = async () => {
+
 try {
     await db();
     await cleanDB();
@@ -74,6 +74,3 @@ await User.findOneAndUpdate(
 
 console.log('Seeding complete!');
 process.exit(0);
-};
-
-export default seed;
