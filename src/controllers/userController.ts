@@ -10,3 +10,13 @@ export const getAllUsers = async (_req: Request, res: Response) => {
         res.status(400).json(err);
     }
 };
+
+export const createUser = async (req: Request, res: Response) => {
+    const user = req.body;
+    try {
+        const users = await User.create(user);
+        res.json(users);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+};

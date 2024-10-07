@@ -6,9 +6,9 @@ export { default as User } from '../models/User.js';
 export { default as Thought } from '../models/Thought.js';
 import data from './userDB.js';
 try {
-    const connection = await db(); // Get the actual connection object
+    const connection = await db();
     await cleanDB();
-    await connection.collection('users').insertMany(data); // Call the collection method on the connection object
+    await connection.collection('users').insertMany(data);
 }
 catch (error) {
     console.error(error);
