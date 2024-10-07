@@ -1,5 +1,5 @@
 import { Router } from "express";
-// need to import routes for users, thoughts, and reactions
+import { userRoutes } from "./userRoutes.js";
 const router = Router();
-// need to create router for users, thoughts, and reactions
+router.use("/users", userRoutes);
 export default router;

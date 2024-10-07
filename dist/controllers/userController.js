@@ -1,12 +1,11 @@
-import { Request, Response } from "express";
 // import { ObjectId } from "mongodb";
 import User from "../models/User.js";
-
-export const getAllUsers = async (_req: Request, res: Response) => {
+export const getAllUsers = async (_req, res) => {
     try {
         const users = await User.find();
         res.json(users);
-    } catch (err) {
+    }
+    catch (err) {
         res.status(400).json(err);
     }
 };

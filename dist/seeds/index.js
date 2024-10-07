@@ -4,7 +4,6 @@ import User from '../models/User.js';
 import cleanDB from './cleanDB.js';
 export { default as User } from '../models/User.js';
 export { default as Thought } from '../models/Thought.js';
-// const seed = async () => {
 try {
     await db();
     await cleanDB();
@@ -64,5 +63,3 @@ await User.findOneAndUpdate({ _id: users[0]._id }, { $push: { thoughts: thoughts
 await User.findOneAndUpdate({ _id: users[1]._id }, { $push: { thoughts: thoughts[1]._id } });
 console.log('Seeding complete!');
 process.exit(0);
-// };
-// export default seed;
