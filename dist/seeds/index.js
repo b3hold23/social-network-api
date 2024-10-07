@@ -4,23 +4,11 @@ import User from '../models/User.js';
 import cleanDB from './cleanDB.js';
 export { default as User } from '../models/User.js';
 export { default as Thought } from '../models/Thought.js';
+import data from './userDB.js';
 try {
-    await db();
+    const connection = await db(); // Get the actual connection object
     await cleanDB();
-    await User.create([
-        {
-            username: 'john_doe',
-            email: 'john@example.com',
-            thoughts: [],
-            friends: []
-        },
-        {
-            username: 'jane_doe',
-            email: 'jane@example.com',
-            thoughts: [],
-            friends: []
-        },
-    ]);
+    await connection.collection('users').insertMany(data); // Call the collection method on the connection object
 }
 catch (error) {
     console.error(error);

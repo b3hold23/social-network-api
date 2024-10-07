@@ -9,8 +9,7 @@ const userData = [
         username: 'jane_doe',
         email: 'jane@example.com',
         thoughts: [],
-        friends: []   
+        friends: []
     }
 ];
-
 export default userData;
