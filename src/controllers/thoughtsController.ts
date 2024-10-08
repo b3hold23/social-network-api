@@ -37,10 +37,6 @@ export const getThoughtById = async (req: Request, res: Response) => {
 
 //Update thought by ID
 export const updateThoughtById = async (req: Request, res: Response) => {
-    console.log("Received request to update user with ID:", req.params.userId);
-    console.log("Request body:", req.body);
-    console.log("User ID:", req.params.userId);
-    console.log("Request body:", req.body);
     try {
         const updatedThought = await Thought
         .findOneAndUpdate(
@@ -50,6 +46,21 @@ export const updateThoughtById = async (req: Request, res: Response) => {
         );
         res.status(200).json(updatedThought);
         console.log(`Updated thought: ${updatedThought}`);
+    } catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+
+//Delete thought by ID
+export const deleteThoughtById = async (req: Request, res: Response) => {
+    try {
+        const deletedThought = await Thought
+        .findOneAndDelete(
+            { _id: req.params.thoughtId },
+        );
+        res.status(200).json(deletedThought);
+        console.log(`Deleted thought: ${deletedThought}`);
     } catch (err) {
         console.log("I don't feel so good, Mr. Stark");
         res.status(500).json({ message: "Something went wrong!" });

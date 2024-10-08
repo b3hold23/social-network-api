@@ -4,7 +4,8 @@ import {
     getAllThoughts,
     createThought,
     getThoughtById,
-    updateThoughtById
+    updateThoughtById,
+    deleteThoughtById
 } from "../../controllers/thoughtsController.js";
 
 router.route("/")
@@ -13,6 +14,7 @@ router.route("/")
 
 router.route("/:thoughtId")
 .get(getThoughtById)
-.put(updateThoughtById);
+.put(updateThoughtById)
+.delete(deleteThoughtById);
 
 export { router as thoughtRoutes };

@@ -35,15 +35,24 @@ export const getThoughtById = async (req, res) => {
 };
 //Update thought by ID
 export const updateThoughtById = async (req, res) => {
-    console.log("Received request to update user with ID:", req.params.userId);
-    console.log("Request body:", req.body);
-    console.log("User ID:", req.params.userId);
-    console.log("Request body:", req.body);
     try {
         const updatedThought = await Thought
             .findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { new: true });
         res.status(200).json(updatedThought);
         console.log(`Updated thought: ${updatedThought}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+//Delete thought by ID
+export const deleteThoughtById = async (req, res) => {
+    try {
+        const deletedThought = await Thought
+            .findOneAndDelete({ _id: req.params.thoughtId });
+        res.status(200).json(deletedThought);
+        console.log(`Deleted thought: ${deletedThought}`);
     }
     catch (err) {
         console.log("I don't feel so good, Mr. Stark");

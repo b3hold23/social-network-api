@@ -1,5 +1,7 @@
 import { ObjectId } from "mongodb";
 import User from "../models/User.js";
+import Thought from "../models/Thought.js";
+// import mongoose from "mongoose";
 export const getAllUsers = async (_req, res) => {
     try {
         const users = await User.find();
@@ -49,6 +51,48 @@ export const deleteUserById = async (req, res) => {
     try {
         const updatedUser = await User
             .findOneAndDelete({ _id: new ObjectId(req.params.userId) });
+        await Thought.deleteMany({ _id: req.params.userId });
+        res.status(200).json(updatedUser);
+        console.log(`Updated user: ${updatedUser}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+//get all friends of a user
+export const getAllFriends = async (req, res) => {
+    try {
+        const friends = await User.findOne({ _id: new ObjectId(req.params.userId) }).populate('friends');
+        res.json(friends);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+// Add a friend to a user's friend list
+export const addAFriend = async (req, res) => {
+    try {
+        console.log("Request body:", req.body);
+        const updatedUser = await User.findOneAndUpdate({ _id: new ObjectId(req.params.userId) }, { $addToSet: { friends: new ObjectId(req.body.friendId) } }, { new: true });
+        if (!updatedUser) {
+            res.status(200).json(updatedUser);
+            console.log(`Updated user: ${updatedUser}`);
+        }
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+// Remove a friend from a user's friend list
+export const removeAFriend = async (req, res) => {
+    console.log("Received request to update user with ID:", req.params.userId);
+    console.log("Friend to remove:", req.body.friendId);
+    try {
+        const updatedUser = await User
+            .findOneAndUpdate({ _id: new ObjectId(req.params.userId) }, { $pull: { friends: new ObjectId(req.body.friendId) } }, { new: true });
         res.status(200).json(updatedUser);
         console.log(`Updated user: ${updatedUser}`);
     }

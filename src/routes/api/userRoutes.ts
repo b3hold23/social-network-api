@@ -5,7 +5,10 @@ import {
     createUser,
     getUserById,
     updateUserById,
-    deleteUserById
+    deleteUserById,
+    getAllFriends,
+    addAFriend,
+    removeAFriend
  } from "../../controllers/userController.js";
 
 router.route("/")
@@ -16,6 +19,13 @@ router.route("/:userId")
 .get(getUserById)
 .put(updateUserById)
 .delete(deleteUserById);
+
+router.route("/:userId/friends")
+.get(getAllFriends)
+.post(addAFriend);
+
+router.route("/:userId/friends/remove")
+.delete(removeAFriend);
 
 
 
