@@ -20,7 +20,7 @@ export const createUser = async (req, res) => {
         res.status(400).json(err);
     }
 };
-// Update a user by ID
+// Get user by ID
 export const getUserById = async (req, res) => {
     const { userId } = req.params;
     try {
@@ -29,5 +29,22 @@ export const getUserById = async (req, res) => {
     }
     catch (err) {
         res.status(400).json(err);
+    }
+};
+// Update user by ID
+export const updateUserById = async (req, res) => {
+    console.log("Received request to update user with ID:", req.params.userId);
+    console.log("Request body:", req.body);
+    console.log("User ID:", req.params.userId);
+    console.log("Request body:", req.body);
+    try {
+        const updatedUser = await User
+            .findOneAndUpdate({ _id: new ObjectId(req.params.userId) }, { $set: req.body }, { new: true });
+        res.status(200).json(updatedUser);
+        console.log(`Updated user: ${updatedUser}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
     }
 };
