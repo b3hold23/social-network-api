@@ -33,10 +33,6 @@ export const getUserById = async (req, res) => {
 };
 // Update user by ID
 export const updateUserById = async (req, res) => {
-    // console.log("Received request to update user with ID:", req.params.userId);
-    // console.log("Request body:", req.body);
-    // console.log("User ID:", req.params.userId);
-    // console.log("Request body:", req.body);
     try {
         const updatedUser = await User
             .findOneAndUpdate({ _id: new ObjectId(req.params.userId) }, { $set: req.body }, { new: true });
@@ -50,10 +46,6 @@ export const updateUserById = async (req, res) => {
 };
 // Delete user by ID
 export const deleteUserById = async (req, res) => {
-    console.log("Received request to update user with ID:", req.params.userId);
-    console.log("Request body:", req.body);
-    console.log("User ID:", req.params.userId);
-    console.log("Request body:", req.body);
     try {
         const updatedUser = await User
             .findOneAndDelete({ _id: new ObjectId(req.params.userId) });

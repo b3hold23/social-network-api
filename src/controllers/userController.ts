@@ -53,10 +53,6 @@ export const updateUserById = async (req: Request, res: Response) => {
 // Delete user by ID
 
 export const deleteUserById = async (req: Request, res: Response) => {
-    console.log("Received request to update user with ID:", req.params.userId);
-    console.log("Request body:", req.body);
-    console.log("User ID:", req.params.userId);
-    console.log("Request body:", req.body);
     try {
         const updatedUser = await User
         .findOneAndDelete(
