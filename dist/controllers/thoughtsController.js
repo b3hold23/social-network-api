@@ -24,10 +24,6 @@ export const createThought = async (req, res) => {
 };
 //Get thought by ID
 export const getThoughtById = async (req, res) => {
-    console.log("Received request to update user with ID:", req.params.userId);
-    console.log("Request body:", req.body);
-    console.log("User ID:", req.params.userId);
-    console.log("Request body:", req.body);
     const { thoughtId } = req.params;
     try {
         const thought = await Thought.findOne({ _id: thoughtId });
@@ -35,5 +31,22 @@ export const getThoughtById = async (req, res) => {
     }
     catch (err) {
         res.status(400).json(err);
+    }
+};
+//Update thought by ID
+export const updateThoughtById = async (req, res) => {
+    console.log("Received request to update user with ID:", req.params.userId);
+    console.log("Request body:", req.body);
+    console.log("User ID:", req.params.userId);
+    console.log("Request body:", req.body);
+    try {
+        const updatedThought = await Thought
+            .findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { new: true });
+        res.status(200).json(updatedThought);
+        console.log(`Updated thought: ${updatedThought}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
     }
 };
