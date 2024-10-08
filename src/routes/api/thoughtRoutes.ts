@@ -1,10 +1,12 @@
 import { Router } from "express";
 const router = Router();
 import {
-    getAllThoughts
+    getAllThoughts,
+    createThought
 } from "../../controllers/thoughtsController.js";
 
 router.route("/")
-.get(getAllThoughts);
+.get(getAllThoughts)
+.post(createThought);
 
 export { router as thoughtRoutes };
