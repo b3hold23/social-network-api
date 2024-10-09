@@ -59,3 +59,29 @@ export const deleteThoughtById = async (req, res) => {
         res.status(500).json({ message: "Something went wrong!" });
     }
 };
+//Add a reaction to a thought
+export const addReaction = async (req, res) => {
+    try {
+        const updatedThought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $addToSet: { reactions: req.body } }, { new: true });
+        res.status(200).json(updatedThought);
+        console.log(`Updated thought: ${updatedThought}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+//remove a reaction from a thought
+export const removeReaction = async (req, res) => {
+    console.log("Received request to remove reaction with ID:", req.params.reactionId);
+    console.log("From thought with ID:", req.params.thoughtId);
+    try {
+        const updatedThought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.params.reactionId } } }, { new: true });
+        res.status(200).json(updatedThought);
+        console.log(`Updated thought: ${updatedThought}`);
+    }
+    catch (err) {
+        console.log("I don't feel so good, Mr. Stark");
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
