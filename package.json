@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "npm install && npx tsc",
+    "render-build": "npm install && npx tsc",
+    "build": "npx tsc",
     "start": "node dist/server.js",
     "seed": "node dist/seeds/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
